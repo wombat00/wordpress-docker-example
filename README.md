@@ -38,7 +38,8 @@ Das erste Segment ist `docker run`, das genau das tut, was es sagt: einen Docker
 In einem realen Szenario sollte jedoch ein sicheres Passwort gewählt werden. Dies simple Passwort wurde hier aus Testzwecken verwendet.**
 
 Jetzt prüfen wir, ob der Container korrekt erstellt wurde und läuft. Dafür nutzen wir folgenden Befehl:
-`docker container ls`
+
+`$ docker container ls`
 
 Folgende Ausgabe sollte erschienen:
 ToDo Sceenshot einfügen
@@ -52,9 +53,9 @@ Das beduetet wir befinden uns jetzt in der MySql-Eingabeaufforderung und können
 
 Als Passwort verwenden wir das vorher im Befehl `$ docker run --name mysql-datenbank -e MYSQL_ROOT_PASSWORD=password -d mysql` festgelegte Passwort.
 
-`mysql> create database wordpress;`
+` $ mysql> create database wordpress;`
 
-Mit `exit` können wir aus dem interaktiven MySql-Modus zurück kehren.
+Mit ` $ exit` können wir aus dem interaktiven MySql-Modus zurück kehren.
 
 ### Einrichtung Wordpress
 Genau wie beim Einrichten von mysql können wir das [offizielle wordpress-Image](https://hub.docker.com/_/wordpress/) verwenden, Wordpress zum Laufen zu bringen.
@@ -124,6 +125,16 @@ services:
 volumes:
   db_data: {}
 ```
+Das Docker Compose File unterscheided sich hier etwas von der manuellen Konfiguration. Felder wie `image` und `ports` bleiben bestehen, jedoch die Umgebungsvariablen, wie Usernamen und Passwörter sind hier ausführlicher aufgeführt um die Kommunikation der beiden Container zu vereinfachen.
+Außerdem kommen hier noch `volumes` hinzu. In der letzten Zeile unsere YAML-Datei legen wir als Volume `db_data` an. Dieses Volume können wir in in unserer Datenbank angeben, siehe Zeile 6-7.
+
+```
+volumes:
+  - db_data:/var/lib/mysql
+```
+
+So haben wir einen persistenten Speicher, der alle Datenbank Infomationen lokal auf dem Host Rechner speichert.
+
 Dann können wir unser Terminal öffnen und mit `$ cd` in das von uns erstellte Verzeichnis springen, in dem die YAML-Datei liegt.
 Mit dem Befehl
 
@@ -142,6 +153,8 @@ Unter andererm bietet Katacoda einen Docker-Playground in dem Docker Befehle aus
 Jedoch muss hierfür ein Account erstellt werden.
 
 Über folgenden [Link](https://www.katacoda.com/courses/docker/playground) kommen wir zu dem Docker Playground.
+
+Mit einen Klick auf "Start Szenario" haben wir Zugriff auf ein Terminal.
 
 
 
