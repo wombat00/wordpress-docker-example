@@ -170,7 +170,23 @@ und dann unser Docker Compose File ausführen:
 
 Nun startet Docker Wordpress und die dazugehörigen MySql-Datenbank in seperaten Container und verbinden sie durch ein erstelltes Netzwerk.
 
+Sobald beide Container hochgefahren sind:
 
+
+
+Könenn wir auf der linken Seite einen Link aufrufen der unseren Localhost simuliert:
+
+
+Hier werden wir nach eine Port gefragt, da wir in unser Docker Compose File den Port 8080 eingetragen haben, geben wir auch hier 8080 ein und drücken auf Display Port:
+
+
+Dort wählen wir zuerst eine Sprache:
+
+
+Dann müssen wir einen Seitentitel und Anmeldeinforamtionen eingeben:
+
+
+Fertig, jetzt können wir uns anmelden und unsere eigene Wordpress Webseite betreiben.
 
 
 
