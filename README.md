@@ -42,11 +42,15 @@ Jetzt prüfen wir, ob der Container korrekt erstellt wurde und läuft. Dafür nu
 `$ docker container ls`
 
 Folgende Ausgabe sollte erschienen:
-ToDo Sceenshot einfügen
+
+![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/Container_ls.PNG)
 
 Als nächstes erstellen wir in der Datenbank eine Tabelle für Wordpress:
 
 `$ docker exec -it mysql-datenbank mysql -u root -p`
+
+![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/MySql.PNG)
+
 
 Dieser Befehl führt `mysql -u root -p` innerhalb des `mysql-datenbank`-Containers aus. Das Flag `-it` führt einen interaktiven Start aus.
 Das beduetet wir befinden uns jetzt in der MySql-Eingabeaufforderung und können eine Tabelle erstellen.
@@ -79,7 +83,15 @@ $ docker network connect wordpress-network mysql-datenbank
 $ docker network connect wordpress-network lokales-wordpress
 ```
 ### Die Installation abschließen
-Abschließend rufen wir http://localhost:8080 im Browser auf und gelangen zum Wordpress-Assistenten. Dort stellen `mysql-datenbank` als Datenbank-Host ein. Nun sind wir in der Lage, den Assistenten fortzusetzen und Wordpress zum Laufen zu bringen.
+Abschließend rufen wir http://localhost:8080 im Browser auf und gelangen zum Wordpress-Assistenten.
+
+Zuerst stellen wir eine Sprache ein:
+
+![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/Wordpress1.PNG)
+
+Dann stellen `mysql-datenbank` als Datenbank-Host ein. Nun sind wir in der Lage, den Assistenten fortzusetzen und Wordpress zum Laufen zu bringen.
+
+![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/Wordpress2.PNG)
 
 ## Installation mit Docker Compose
 Die Verwendung von Docker Compose ist eine weitere Methode Wordpress mit einer MySql-Datenbank über Docker zu installieren.
@@ -97,40 +109,48 @@ Jetzt können wir unsere Konfigurationsdatei erstellen, das sogenannte Docker Co
 Inhalt der `docker-compose.yaml`
 ```
 version: "3.3"
-
+    
 services:
   db:
-    image: mysql
+    image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: mysql-datenbank
-      MYSQL_USER: mysqluser
-      MYSQL_PASSWORD: password
-
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    
   wordpress:
     depends_on:
       - db
-    image: wordpress
+    image: wordpress:latest
+    volumes:
+      - wordpress_data:/var/www/html
     ports:
       - "8080:80"
     restart: always
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: mysqluser
-      WORDPRESS_DB_PASSWORD: password
-      WORDPRESS_DB_NAME: mysql-datenbank
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
 volumes:
   db_data: {}
+  wordpress_data: {}
 ```
 Das Docker Compose File unterscheided sich hier etwas von der manuellen Konfiguration. Felder wie `image` und `ports` bleiben bestehen, jedoch die Umgebungsvariablen, wie Usernamen und Passwörter sind hier ausführlicher aufgeführt um die Kommunikation der beiden Container zu vereinfachen.
-Außerdem kommen hier noch `volumes` hinzu. In der letzten Zeile unsere YAML-Datei legen wir als Volume `db_data` an. Dieses Volume können wir in in unserer Datenbank angeben, siehe Zeile 6-7.
+Außerdem kommen hier noch `volumes` hinzu. In der letzten Zeile unsere YAML-Datei legen wir als Volume `db_data` und `wordpress_data` an. Dieses Volumes können wir in in unserer Datenbank angeben bzw. Wordpress Konfiguration angeben.
 
 ```
 volumes:
   - db_data:/var/lib/mysql
+```
+
+```
+volumes:
+  - wordpress_data:/var/www/html
 ```
 
 So haben wir einen persistenten Speicher, der alle Datenbank Infomationen lokal auf dem Host Rechner speichert.
@@ -172,21 +192,29 @@ Nun startet Docker Wordpress und die dazugehörigen MySql-Datenbank in seperaten
 
 Sobald beide Container hochgefahren sind:
 
-
+```
+Creating wordpress-docker-example_db_1 ... done
+Creating wordpress-docker-example_wordpress_1 ... done
+```
 
 Könenn wir auf der linken Seite einen Link aufrufen der unseren Localhost simuliert:
 
+![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/LinkPort.PNG)
 
 Hier werden wir nach eine Port gefragt, da wir in unser Docker Compose File den Port 8080 eingetragen haben, geben wir auch hier 8080 ein und drücken auf Display Port:
 
+![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/Port.PNG)
 
 Dort wählen wir zuerst eine Sprache:
 
+![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/Wordpress1.PNG)
 
 Dann müssen wir einen Seitentitel und Anmeldeinforamtionen eingeben:
+
+![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/anmelden.PNG)
 
 
 Fertig, jetzt können wir uns anmelden und unsere eigene Wordpress Webseite betreiben.
 
-
+![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/erfolg.PNG)
 
