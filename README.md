@@ -5,6 +5,7 @@ WordPress ist ein freies Content-Management-System (CMS). Mit Wordpress können 
 ## Vorgehen
 1. Installation mit Docker
 2. Installation mit Docker Compose
+3. Anleitung zum Testen
 
 ## Installation mit Docker
 ### Installation Docker
