@@ -90,7 +90,7 @@ Als erstes erstellen wir zur Übersichtlichkeit ein neues Verzeichnis. Dafür ö
 `$ mkdir wordpress`
 
 Nun spring wir mit `$ cd wordpress/` in das angelegte Verzeichnis.
-Jetzt können wir unsere Konfigurationsdatei erstellen, das sogenannte Docker Compose File. Dieses sollten wir `docker-compose` nennen und der Dateiname muss entweder `.yml` oder `.yaml` sein. Da...
+Jetzt können wir unsere Konfigurationsdatei erstellen, das sogenannte Docker Compose File. Dieses nennen wir `docker-compose.yaml`.
 
 `$vi docker-compose.yaml`
 
@@ -155,6 +155,22 @@ Jedoch muss hierfür ein Account erstellt werden.
 Über folgenden [Link](https://www.katacoda.com/courses/docker/playground) kommen wir zu dem Docker Playground.
 
 Mit einen Klick auf "Start Szenario" haben wir Zugriff auf ein Terminal.
+
+Jetzt clonen wir dieses Repository in den Katacoda Docker Playground. Dafür nutzen wir folgenden Befehl:
+
+`$ git clone https://github.com/wombat00/wordpress-docker-example.git`
+
+Nun können wir auf das Docker Compose File zugreifen, indem wir wir in das Repository springen:
+
+`$ cd wordpress-docker-example/ `
+
+und dann unser Docker Compose File ausführen:
+
+`$ docker-compose up -d`
+
+Nun startet Docker Wordpress und die dazugehörigen MySql-Datenbank in seperaten Container und verbinden sie durch ein erstelltes Netzwerk.
+
+
 
 
 
