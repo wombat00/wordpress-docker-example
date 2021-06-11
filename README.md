@@ -141,7 +141,7 @@ volumes:
   wordpress_data: {}
 ```
 Das Docker Compose File unterscheided sich hier etwas von der manuellen Konfiguration. Felder wie `image` und `ports` bleiben bestehen, jedoch die Umgebungsvariablen, wie Usernamen und Passwörter sind hier ausführlicher aufgeführt um die Kommunikation der beiden Container zu vereinfachen.
-Außerdem kommen hier noch `volumes` hinzu. In der letzten Zeile unsere YAML-Datei legen wir als Volume `db_data` und `wordpress_data` an. Dieses Volumes können wir in in unserer Datenbank angeben bzw. Wordpress Konfiguration angeben.
+Außerdem kommen hier noch `volumes` hinzu. In der letzten Zeile unsere YAML-Datei legen wir als Volume `db_data` und `wordpress_data` an. Diese Volumes können wir in in unserer Datenbank bzw. Wordpress Konfiguration angeben.
 
 ```
 volumes:
@@ -153,14 +153,13 @@ volumes:
   - wordpress_data:/var/www/html
 ```
 
-So haben wir einen persistenten Speicher, der alle Datenbank Infomationen lokal auf dem Host Rechner speichert.
+So haben wir einen persistenten Speicher, der alle Infomationen lokal auf dem Host Rechner speichert.
 
-Dann können wir unser Terminal öffnen und mit `$ cd` in das von uns erstellte Verzeichnis springen, in dem die YAML-Datei liegt.
-Mit dem Befehl
+Mit dem Befehl 
 
 `docker-compose up -d`
 
-beide Container starten. Jetzt können wir wie schon im ersten Beispiel erklärt im Browser http://localhost:8080 aufrufen und die Wordpress installation abschließen.
+können wir beide Container starten. Jetzt können wir wie schon im ersten Beispiel erklärt im Browser http://localhost:8080 aufrufen und die Wordpress installation abschließen.
 
 Um beide Container zu stoppen nutzen wir den Befehl
 
