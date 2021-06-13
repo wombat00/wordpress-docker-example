@@ -107,7 +107,7 @@ Als erstes erstellen wir zur Übersichtlichkeit ein neues Verzeichnis. Dafür ö
 Nun spring wir mit `$ cd wordpress/` in das angelegte Verzeichnis.
 Jetzt können wir unsere Konfigurationsdatei erstellen, das sogenannte Docker Compose File. Dieses nennen wir `docker-compose.yaml`.
 
-`$vi docker-compose.yaml`
+`$ vi docker-compose.yaml`
 
 Inhalt der `docker-compose.yaml`
 ```
@@ -144,23 +144,18 @@ volumes:
   wordpress_data: {}
 ```
 Das Docker Compose File unterscheided sich hier etwas von der manuellen Konfiguration. Felder wie `image` und `ports` bleiben bestehen, jedoch die Umgebungsvariablen, wie Usernamen und Passwörter sind hier ausführlicher aufgeführt um die Kommunikation der beiden Container zu vereinfachen.
-Außerdem kommen hier noch `volumes` hinzu. In der letzten Zeile unsere YAML-Datei legen wir als Volume `db_data` und `wordpress_data` an. Diese Volumes können wir in in unserer Datenbank bzw. Wordpress Konfiguration angeben.
+Außerdem kommen hier noch `volumes` hinzu. In der letzten Zeile unsere YAML-Datei legen wir als Volume `db_data` an. Dieses Volume können wir in in unserer Datenbank Konfiguration angeben.
 
 ```
 volumes:
   - db_data:/var/lib/mysql
 ```
 
-```
-volumes:
-  - wordpress_data:/var/www/html
-```
-
 So haben wir einen persistenten Speicher, der alle Infomationen lokal auf dem Host Rechner speichert.
 
 Mit dem Befehl 
 
-`docker-compose up -d`
+`$ docker-compose up -d`
 
 können wir beide Container starten. Jetzt können wir wie schon im ersten Beispiel erklärt im Browser http://localhost:8080 aufrufen und die Wordpress installation abschließen.
 
@@ -199,11 +194,11 @@ Creating wordpress-docker-example_db_1 ... done
 Creating wordpress-docker-example_wordpress_1 ... done
 ```
 
-Könenn wir auf der linken Seite einen Link aufrufen der unseren Localhost simuliert:
+Könenn wir auf der linken Seite einen Link aufrufen der Localhost simuliert:
 
 ![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/LinkPort.PNG)
 
-Hier werden wir nach eine Port gefragt, da wir in unser Docker Compose File den Port 8080 eingetragen haben, geben wir auch hier 8080 ein und drücken auf Display Port:
+Hier werden wir nach eine Port gefragt, da wir in unser Docker Compose File den Port 8080 für Wordpress eingetragen haben, geben wir auch hier 8080 ein und drücken auf Display Port:
 
 ![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/Port.PNG)
 
