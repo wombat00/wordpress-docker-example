@@ -202,6 +202,8 @@ Hier werden wir nach eine Port gefragt, da wir in unser Docker Compose File den 
 
 ![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/Port.PNG)
 
+Es kann vorkommen, dass eine Seite mit "Error establishing a database connection" erscheint. Sollte das der Fall, kann die Seite geschlossen werden und neu geöffnet werden.
+Nach ein paar Versuchen sollte es dann funktionieren.
 Dort wählen wir zuerst eine Sprache:
 
 ![alt text](https://github.com/wombat00/wordpress-docker-example/blob/main/Doku/Wordpress1.PNG)
