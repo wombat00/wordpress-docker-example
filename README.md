@@ -111,26 +111,24 @@ Jetzt können wir unsere Konfigurationsdatei erstellen, das sogenannte Docker Co
 
 Inhalt der `docker-compose.yaml`
 ```
-version: "3.3"
-    
+version: "3.5"
+
 services:
   db:
     image: mysql:5.7
-    volumes:
-      - db_data:/var/lib/mysql
     restart: always
+    volumes:
+      - db_data:/var/lib/
     environment:
       MYSQL_ROOT_PASSWORD: somewordpress
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
-    
+
   wordpress:
     depends_on:
       - db
     image: wordpress:latest
-    volumes:
-      - wordpress_data:/var/www/html
     ports:
       - "8080:80"
     restart: always
@@ -141,7 +139,6 @@ services:
       WORDPRESS_DB_NAME: wordpress
 volumes:
   db_data: {}
-  wordpress_data: {}
 ```
 Das Docker Compose File unterscheided sich hier etwas von der manuellen Konfiguration. Felder wie `image` und `ports` bleiben bestehen, jedoch die Umgebungsvariablen, wie Usernamen und Passwörter sind hier ausführlicher aufgeführt um die Kommunikation der beiden Container zu vereinfachen.
 Außerdem kommen hier noch `volumes` hinzu. In der letzten Zeile unsere YAML-Datei legen wir als Volume `db_data` an. Dieses Volume können wir in in unserer Datenbank Konfiguration angeben.
