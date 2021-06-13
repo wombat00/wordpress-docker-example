@@ -58,6 +58,8 @@ Das beduetet wir befinden uns jetzt in der MySql-Eingabeaufforderung und können
 
 Als Passwort verwenden wir das vorher im Befehl `$ docker run --name mysql-datenbank -e MYSQL_ROOT_PASSWORD=password -d mysql` festgelegte Passwort.
 
+Nun erstellen wir eine neue Tabelle für Wordpress.
+
 ` $ mysql> create database wordpress;`
 
 Mit ` $ exit` können wir aus dem interaktiven MySql-Modus zurück kehren.
@@ -80,8 +82,8 @@ Um dieses Problem zu beheben, erstellen wir ein neues Netzwerk und hängen beide
 Mit dem obigen Befehl wird Docker angewiesen, ein neues Netzwerk namens `wordpress-netzwerk` zu erstellen, das manuell an Container angehängt werden kann. Nachdem das Netzwerk erstellt wurde, können wir es mit den Containern verbinden.
 
 ```
-$ docker network connect wordpress-network mysql-datenbank
-$ docker network connect wordpress-network lokales-wordpress
+$ docker network connect wordpress-netzwerk mysql-datenbank
+$ docker network connect wordpress-netzwerk lokales-wordpress
 ```
 ### Die Installation abschließen
 Abschließend rufen wir http://localhost:8080 im Browser auf und gelangen zum Wordpress-Assistenten.
